@@ -4,9 +4,10 @@ using namespace std;
 
 // 10. Өгөгдсөн тоо анхны тоо эсэхийг шалга.
 
-bool CheckPrimeNumber(int a)
+bool CheckPrimeNumber(int a) // анхны тоо олох функц
 {
-    int m = sqrt(a);
+    // тоог тухайн тооны язгуур хүртэлх бүх натурал тоонд хувааж анхны тоо мөн эсэхийг шалгана.
+    int m = sqrt(a); 
     int b = 0;
     for (int i = 2; i <= m; i++)
     {

@@ -1,28 +1,56 @@
 #include <iostream>
 using namespace std;
 
-// 6. Өгөгдсөн N ширхэг тооны хамгийн их/хамгийн багийг ол.
+// 9. Хүснэгтийг өсөх/буурахаар эрэмбэл.
 
-int MaxArray(int array[], int N) // Хүснэгтийн нийлбэрийг олох функц
+void swapNumbers(int &a, int &b)// 2 тооны байрыг солих функц
 {
-    int max = array[0];
-    for (int i = 0; i < N; i++)
-    {
-        if (max < array[i])
-            max = array[i];
-    }
-    return max;
+    int temp = a;
+    a = b;
+    b = temp;
 }
 
-int MinArray(int array[], int N) // Хүснэгтийн нийлбэрийг олох функц
+void sortByDescending(int array[], int n) // selection sort-оор хүснэгтийг буурахаар эрэмбэлэх функц
 {
-    int min = array[0];
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < n - 1; ++i)
     {
-        if (min > array[i])
-            min = array[i];
+        int max = i; // хамгийн ихийг хайна
+
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (array[j] > array[max])
+            { // өсөх биш буурах нөхцөл
+                max = j;
+            }
+        }
+        swapNumbers(array[i], array[max]);
     }
-    return min;
+}
+
+void sortByAscending(int array[], int n) // selection sort-оор хүснэгтийг өсөхөөр эрэмбэлэх функц
+{
+    for (int i = 0; i < n - 1; ++i)
+    {
+        int min = i;
+
+        for (int j = i + 1; j < n; ++j)
+        {
+            if (array[j] < array[min])
+            {
+                min = j;
+            }
+        }
+        swapNumbers(array[i], array[min]);
+    }
+}
+
+void printArray(int arr[], int n) // хүснэгтийг хэвлэх
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << "\t";
+    }
+    cout << endl;
 }
 
 int main()
@@ -35,11 +63,18 @@ int main()
     {
         cin >> array[i];
     }
-    int max = MaxArray(array, N);
-    long min = MinArray(array, N);
-    cout << "Хүснэгтийн хамгийн их тоо = " << max << endl;
-    cout << "Хүснэгтийн хамгийн бага тоо = " << min << endl;
+
+    sortByAscending(array, N);
+
+    cout << "Хүснэгтийг өсөхөөр эрэмбэлэвэл" << endl;
+    printArray(array, N);
+
+    sortByDescending(array, N);
+
+    cout << "Хүснэгтийг буурахаар эрэмбэлэвэл" << endl;
+    printArray(array, N);
+
     return 0;
 }
-// g++ exam6.cpp -o exam6
-// ./exam6
+// g++ exam9.cpp -o exam9
+// ./exam9
